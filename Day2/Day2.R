@@ -11,7 +11,7 @@ max_green <- 13
 max_blue <- 14
 
 find_max_num_cubes <- function(cube_sets, color, return_max) {
-  n <- max(as.integer(stringr::str_extract(cube_sets, pattern = paste("([0-9]+)", color), group = 1)), na.rm = T)
+  n <- max(as.integer(str_extract(cube_sets, pattern = paste("([0-9]+)", color), group = 1)), na.rm = T)
   if (return_max) { return(n) }
   if (color == "red") { return(n > max_red) }
   if (color == "green") { return(n > max_green) }
@@ -19,8 +19,8 @@ find_max_num_cubes <- function(cube_sets, color, return_max) {
 }
 
 sum(sapply(games, function(game) {
-  cube_sets <- stringr::str_split(game, pattern = ":|;")[[1]]
-  game_number <- as.integer(stringr::str_extract(game[1], pattern = "Game ([0-9]+)", group = 1))
+  cube_sets <- str_split(game, pattern = ":|;")[[1]]
+  game_number <- as.integer(str_extract(game[1], pattern = "Game ([0-9]+)", group = 1))
   cube_sets <- cube_sets[2:length(cube_sets)]
   if (puzzle == 1) { return_value <- F }
   else { return_value <- T }
