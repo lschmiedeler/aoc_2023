@@ -49,9 +49,7 @@ part_numbers <- sapply(seq(1, nrows * ncols), function(x) {
         else { break }
         i <- i + 1
       }
-      symbol_i <- sapply(seq(0, i - 1), function(y) {
-        return(check_for_symbol(x+y))
-      })
+      symbol_i <- sapply(seq(0, i - 1), function(y) { return(check_for_symbol(x+y)) })
       if (sum(symbol_i > 0)) { 
         info <- c(as.numeric(paste0(number, collapse = "")), max(symbol_i))
         return(info)
