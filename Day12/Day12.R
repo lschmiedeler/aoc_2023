@@ -26,12 +26,10 @@ count_valid_arrange <- function(springs, groups) {
             first_operational <- which(springs == ".")[1]
             current_group <- springs[1:first_operational - 1] 
         }
-
         if (length(current_group) < groups[1]) { return(0) }
         else if (length(current_group) == groups[1]) { return(count_valid_arrange(springs[-1:-first_operational], groups[-1])) }
-        else { 
-            if (current_group[groups[1] + 1] == "?") { return(count_valid_arrange(springs[-1:-(groups[1] + 1)], groups[-1])) } else { return (0) }
-        }
+        else if (current_group[groups[1] + 1] == "?") { return(count_valid_arrange(springs[-1:-(groups[1] + 1)], groups[-1])) }
+        else { return (0) }
     }
 }
 

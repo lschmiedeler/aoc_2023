@@ -58,11 +58,9 @@ summarize_patterns <- function(patterns, vertical) {
     })
 }
 
-patterns_t_mat <- lapply(patterns, function(pattern) {
+patterns_t <- lapply(patterns, function(pattern) {
     new_pattern <- (lapply(pattern, function(p) { str_split(p, "")[[1]] }))
-    t(matrix(unlist(new_pattern), nrow = length(new_pattern), byrow = T))
-})
-patterns_t <- lapply(patterns_t_mat, function(pattern_t) {
+    pattern_t <- t(matrix(unlist(new_pattern), nrow = length(new_pattern), byrow = T))
     sapply(1:nrow(pattern_t), function(r) { paste(pattern_t[r,], collapse = "") }) 
 })
 
