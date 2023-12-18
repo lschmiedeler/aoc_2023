@@ -7,6 +7,12 @@ connection <- file(description = "Day13Input.txt", open = "r")
 patterns <- str_split(str_split(paste(readLines(connection), collapse = "\n"), "\\n\\n")[[1]], "\\n")
 close(connection)
 
+patterns_t <- lapply(patterns, function(pattern) {
+    new_pattern <- (lapply(pattern, function(p) { str_split(p, "")[[1]] }))
+    pattern_t <- t(matrix(unlist(new_pattern), nrow = length(new_pattern), byrow = T))
+    sapply(1:nrow(pattern_t), function(r) { paste(pattern_t[r,], collapse = "") }) 
+})
+
 summarize_reflection <- function(reflection_col, diff_indices, n, vertical) {
     if (sum(diff_indices %in% reflection_col[diff_indices]) == length(diff_indices)) {
         if (vertical) { return(n) } else { return(100 * n) }
@@ -57,11 +63,5 @@ summarize_patterns <- function(patterns, vertical) {
         return(summary)
     })
 }
-
-patterns_t <- lapply(patterns, function(pattern) {
-    new_pattern <- (lapply(pattern, function(p) { str_split(p, "")[[1]] }))
-    pattern_t <- t(matrix(unlist(new_pattern), nrow = length(new_pattern), byrow = T))
-    sapply(1:nrow(pattern_t), function(r) { paste(pattern_t[r,], collapse = "") }) 
-})
 
 sum(summarize_patterns(patterns, F), summarize_patterns(patterns_t, T))
